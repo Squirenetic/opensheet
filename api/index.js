@@ -5,6 +5,8 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
 })
 
+// Just testing
+
 const sheets = google.sheets({ version: 'v4', auth })
 
 export default async function (req, res) {
@@ -13,7 +15,7 @@ export default async function (req, res) {
   // Allow any other website to access this API.
   res.setHeader('Access-Control-Allow-Origin', '*')
 
-  if (! isNaN(sheet)) {
+  if (!isNaN(sheet)) {
     const { data } = await sheets.spreadsheets.get({
       spreadsheetId: id
     })
@@ -35,7 +37,7 @@ export default async function (req, res) {
     spreadsheetId: id,
     range: sheet
   }, (error, result) => {
-    if(error) {
+    if (error) {
       return res.json({ error: error.response.data.error.message })
     }
 
